@@ -11,12 +11,19 @@ class BinaryTreeNode {
 class BinaryTree {
   constructor(root = null) {
     this.root = root;
+    this.leftCount = null;
+    this.rightCount = null;
   }
 
   /** minDepth(): return the minimum depth of the tree -- that is,
    * the length of the shortest path from the root to a leaf. */
 
   minDepth() {
+    if(this.root === null) return 0;
+    let left = this.root;
+    let right = this.right;
+
+    // while(this.left !== null || this.right !== null)
 
   }
 

@@ -32,6 +32,8 @@ beforeEach(function() {
   largeTree = new Tree(n);
 });
 
+afterEach()
+
 describe("sumValues", function() {
   it("sums simple trees", function() {
     expect(smallTree.sumValues()).toEqual(3);
@@ -42,6 +44,7 @@ describe("sumValues", function() {
   });
 
   it("sums up an empty tree", function() {
+    let test = emptyTree.sumValues();
     expect(emptyTree.sumValues()).toEqual(0);
   });
 });
