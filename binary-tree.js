@@ -11,20 +11,43 @@ class BinaryTreeNode {
 class BinaryTree {
   constructor(root = null) {
     this.root = root;
-    this.leftCount = null;
-    this.rightCount = null;
+    this.count = null;
   }
 
   /** minDepth(): return the minimum depth of the tree -- that is,
    * the length of the shortest path from the root to a leaf. */
 
   minDepth() {
-    if(this.root === null) return 0;
-    let left = this.root;
-    let right = this.right;
-
-    // while(this.left !== null || this.right !== null)
-
+    this.count = 0;
+    if(this.root === null){
+      return 0;
+    } else {
+      this.count ++;
+    }
+    let queue = [this.root];
+    
+    while(queue !== 0){
+      let arrLen = queue.length;
+      // loop through current row
+      // if any have a child
+      for(let i=0; i<arrLen; i++){
+        let currentNode = queue.shift();
+        if(currentNode.left === null && currentNode.right === null){
+          return this.count;
+        }
+        if(currentNode.left){
+          queue.push(currentNode.left);
+        }
+        if(currentNode.right){
+          queue.push(currentNode.right);
+        }
+        this.count ++;
+      }
+      // if(currentNode.left !== null || currentNode.right !== null)
+  
+    }
+    return this.count;
+  
   }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
@@ -80,3 +103,4 @@ class BinaryTree {
 }
 
 module.exports = { BinaryTree, BinaryTreeNode };
+

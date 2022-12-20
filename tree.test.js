@@ -32,7 +32,7 @@ beforeEach(function() {
   largeTree = new Tree(n);
 });
 
-afterEach()
+// afterEach()
 
 describe("sumValues", function() {
   it("sums simple trees", function() {
