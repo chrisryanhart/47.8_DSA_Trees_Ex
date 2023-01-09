@@ -12,6 +12,7 @@ class BinaryTree {
   constructor(root = null) {
     this.root = root;
     this.count = null;
+    this.sum = 0;
   }
 
   /** minDepth(): return the minimum depth of the tree -- that is,
@@ -97,6 +98,56 @@ class BinaryTree {
 
   maxSum() {
 
+    // Max sum of a path occurs when their are no children for a given node
+    if(this.root === null) return 0;
+
+    // have to loop through root
+    // inspect value of children
+    const findSum = (node) => {
+      let leftNode = node.left;
+      let rightNode = node.right;
+
+      // if 2 nodes present, find node with longer path
+      if(leftNode && rightNode){
+        let rightSum = findSum(rightNode);
+        let leftSum = findSum(leftNode);
+
+        // only return the val that has the higher sum with the leg
+
+        this.sum = rightSum + leftSum + node.val;
+
+        let rightPathVal = rightSum + node.val;
+
+        let leftPathVal = leftSum + node.val;
+
+        let maxPathVal = rightPathVal >= leftPathVal ? rightPathVal : leftPathVal;
+
+        if(maxPathVal > 0){
+          return maxPathVal;
+        } else {
+          return 0;
+        }
+      }
+
+      // if one node present
+      if(leftNode || rightNode){
+        if(leftNode){
+
+          return findSum(leftNode);
+        }
+        if(rightNode){
+          return findSum(rightNode);
+        }
+      }
+
+      // if()
+      
+      // if no children return node.val
+      return node.val;
+    }
+
+    findSum(this.root);
+    return this.sum;
   }
 
   /** nextLarger(lowerBound): return the smallest value in the tree
