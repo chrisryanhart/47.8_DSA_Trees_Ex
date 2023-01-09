@@ -55,6 +55,41 @@ class BinaryTree {
 
   maxDepth() {
 
+    if(this.root === null) return 0;
+
+    this.count = 0;
+
+    // have to loop through root
+    const findDepth = (node) => {
+      let leftNode = node.left;
+      let rightNode = node.right;
+
+      // if 2 nodes present, find node with longer path
+      if(leftNode && rightNode){
+        let rightCount = findDepth(rightNode);
+        let leftCount = findDepth(leftNode);
+
+        let nodeCount = rightCount >= leftCount ? rightCount : leftCount;
+
+        return nodeCount + 1;
+      }
+
+      // if one node present
+      if(leftNode || rightNode){
+        if(leftNode){
+          return findDepth(leftNode) + 1;
+        }
+        if(rightNode){
+          return findDepth(rightNode) + 1;
+        }
+      }
+      
+      // if no children return 1
+      return 1;
+    }
+
+    return this.count + findDepth(this.root);
+  
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.

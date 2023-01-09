@@ -24,33 +24,33 @@ beforeEach(function() {
   largeTree = new BinaryTree(root);
 });
 
-describe("minDepth", function() {
-  it("handles simple trees", function() {
-    expect(smallTree.minDepth()).toBe(2);
-  });
-
-  it("handles more complex trees", function() {
-    expect(largeTree.minDepth()).toBe(2);
-  });
-
-  it("handles empty trees", function() {
-    expect(emptyTree.minDepth()).toBe(0);
-  });
-});
-
-// describe("maxDepth", function() {
+// describe("minDepth", function() {
 //   it("handles simple trees", function() {
-//     expect(smallTree.maxDepth()).toBe(2);
+//     expect(smallTree.minDepth()).toBe(2);
 //   });
 
 //   it("handles more complex trees", function() {
-//     expect(largeTree.maxDepth()).toBe(4);
+//     expect(largeTree.minDepth()).toBe(2);
 //   });
 
 //   it("handles empty trees", function() {
-//     expect(emptyTree.maxDepth()).toBe(0);
+//     expect(emptyTree.minDepth()).toBe(0);
 //   });
 // });
+
+describe("maxDepth", function() {
+  it("handles simple trees", function() {
+    expect(smallTree.maxDepth()).toBe(2);
+  });
+
+  it("handles more complex trees", function() {
+    expect(largeTree.maxDepth()).toBe(4);
+  });
+
+  it("handles empty trees", function() {
+    expect(emptyTree.maxDepth()).toBe(0);
+  });
+});
 
 // describe("maxSum", function() {
 //   it("handles simple trees", function() {
