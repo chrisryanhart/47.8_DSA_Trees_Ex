@@ -13,6 +13,7 @@ class BinaryTree {
     this.root = root;
     this.count = null;
     this.sum = 0;
+    this.max = 0;
   }
 
   /** minDepth(): return the minimum depth of the tree -- that is,
@@ -29,8 +30,7 @@ class BinaryTree {
     
     while(queue !== 0){
       let arrLen = queue.length;
-      // loop through current row
-      // if any have a child
+
       for(let i=0; i<arrLen; i++){
         let currentNode = queue.shift();
         if(currentNode.left === null && currentNode.right === null){
@@ -98,52 +98,33 @@ class BinaryTree {
 
   maxSum() {
 
-    // Max sum of a path occurs when their are no children for a given node
     if(this.root === null) return 0;
 
-    // have to loop through root
-    // inspect value of children
+
     const findSum = (node) => {
+      if(node === null) return 0;
+      
       let leftNode = node.left;
       let rightNode = node.right;
 
-      // if 2 nodes present, find node with longer path
-      if(leftNode && rightNode){
-        let rightSum = findSum(rightNode);
-        let leftSum = findSum(leftNode);
+      let rightSum = findSum(rightNode);
+      let leftSum = findSum(leftNode);
 
-        // only return the val that has the higher sum with the leg
 
-        this.sum = rightSum + leftSum + node.val;
-
-        let rightPathVal = rightSum + node.val;
-
-        let leftPathVal = leftSum + node.val;
-
-        let maxPathVal = rightPathVal >= leftPathVal ? rightPathVal : leftPathVal;
-
-        if(maxPathVal > 0){
-          return maxPathVal;
-        } else {
-          return 0;
-        }
+      let childrenSum = rightSum + leftSum + node.val;
+      if(childrenSum > this.sum){
+          this.sum = childrenSum;
       }
 
-      // if one node present
-      if(leftNode || rightNode){
-        if(leftNode){
+      let rightPathVal = rightSum + node.val;
 
-          return findSum(leftNode);
-        }
-        if(rightNode){
-          return findSum(rightNode);
-        }
-      }
+      let leftPathVal = leftSum + node.val;
 
-      // if()
+      let maxPathVal = rightPathVal >= leftPathVal ? rightPathVal : leftPathVal;
+
+
+      return maxPathVal;
       
-      // if no children return node.val
-      return node.val;
     }
 
     findSum(this.root);
@@ -154,7 +135,33 @@ class BinaryTree {
    * which is larger than lowerBound. Return null if no such value exists. */
 
   nextLarger(lowerBound) {
+    this.max = 0;
+    if(this.root === null){
+      return null;
+    }
 
+    let queue = [this.root];
+    
+    while(queue.length !== 0){
+      let arrLen = queue.length;
+      for(let i=0; i<arrLen; i++){
+        let currentNode = queue.shift();
+        if(currentNode.val > lowerBound) this.max = currentNode.val;
+
+        if(currentNode.left){
+          queue.push(currentNode.left);
+        }
+        if(currentNode.right){
+          queue.push(currentNode.right);
+        }
+      }
+  
+    }
+    if(this.max === 0){
+      return null;
+    }else{
+      return this.max;
+    }
   }
 
   /** Further study!
